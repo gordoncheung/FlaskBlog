@@ -42,6 +42,15 @@
                         {% endif %}
                     </div>      
                     <div class="form-group">
+                        {{ form.address.label() }}
+                        {{ form.address(class="form-control-file") }}
+                        {% if form.address.errors %}
+                            {% for error in form.address.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>  
+                    <div class="form-group">
                         {{ form.picture.label() }}
                         {{ form.picture(class="form-control-file") }}
                         {% if form.picture.errors %}
@@ -49,7 +58,7 @@
                                 <span class="text-danger">{{ error }}</span></br>
                             {% endfor %}
                         {% endif %}
-                    </div>       
+                    </div>                        
                 </fieldset>
                 <div class="form-group">
                     {{ form.submit(class="btn btn-outline-info") }}
