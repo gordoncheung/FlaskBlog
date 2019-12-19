@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    address = db.Column(db.Text(200))
+    address = db.Column(db.String(200))
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     # We will hash password so we don't store as plaintext
     password = db.Column(db.String(60), nullable=False)
