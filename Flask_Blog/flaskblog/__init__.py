@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager # Session handler
 from flask_mail import Mail
+from flask_socketio import SocketIO
 # Anytime you import anything from a module, it runs all the code in the module
 
 
@@ -14,6 +15,7 @@ from flask_mail import Mail
 #login_manager = LoginManager(app)
 db = SQLAlchemy()
 bcrypt = Bcrypt()
+socketio = SocketIO()
 login_manager = LoginManager()
 # Pass function name login() to the login_view
 login_manager.login_view = 'users.login'
@@ -34,12 +36,15 @@ def create_app(config_class=Config):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
+    socketio.init_app(app)
 
     from flaskblog.users.routes import users
     from flaskblog.posts.routes import posts
     from flaskblog.main.routes import main
     from flaskblog.errors.handlers import errors
+    from flaskblog.chat.routes import chat
 
+    app.register_blueprint(chat)
     app.register_blueprint(users)
     app.register_blueprint(posts)
     app.register_blueprint(main)
